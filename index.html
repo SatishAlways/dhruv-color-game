@@ -3,251 +3,612 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEAM LEGEND - VIP Access</title>
-    <!-- Backup Redirect after 2 seconds -->
-    <meta http-equiv="refresh" content="2;url=https://t.me/itzdhruvcustom">
-    
-    <!-- Ultra Premium Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>◈ DHRUV HACK • V3 MAX ◈</title>
+    <!-- Premium Gaming Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
         * {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #03030a;
+            color: #fff;
+            overflow-x: hidden;
+            font-family: 'Rajdhani', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        body {
-            background: #06060c;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            overflow: hidden;
             position: relative;
         }
 
-        /* Ambient Background Glows */
-        body::before, body::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 0;
-            opacity: 0.4;
-        }
         body::before {
-            background: #00ff87; /* Trading Green */
-            top: -50px;
-            left: -50px;
-        }
-        body::after {
-            background: #ff3b30; /* Trading Red */
-            bottom: -50px;
-            right: -50px;
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                linear-gradient(rgba(0, 212, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
         }
 
-        .main-card {
-            width: 100%;
-            max-width: 400px;
-            background: rgba(255, 255, 255, 0.02);
+        .app-frame {
+            max-width: 480px;
+            margin: auto;
+            padding: 20px 15px;
+            position: relative;
+        }
+
+        .cyber-card {
+            background: rgba(4, 10, 24, 0.85);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 32px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            z-index: 1;
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.08), inset 0 0 20px rgba(0, 212, 255, 0.03);
             position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+            will-change: transform;
+            animation: floatCard 5s ease-in-out infinite;
         }
 
-        /* Smooth Neon Ring Around Logo */
-        .avatar-box {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 25px;
-        }
-
-        .avatar-box::before {
+        .cyber-card::before {
             content: '';
             position: absolute;
-            top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00ff87, #9b51e0, #ff3b30);
-            z-index: -1;
-            box-shadow: 0 0 25px rgba(155, 81, 224, 0.5);
+            top: 0; left: -100%; 
+            width: 50%; height: 3px;
+            background: linear-gradient(90deg, transparent, #00d4ff, #ff003c, transparent);
+            box-shadow: 0 0 15px #00d4ff;
+            animation: sweepLine 3s infinite linear;
         }
 
-        .logo-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #06060c;
-            background: #000;
+        .header {
+            text-align: center;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
         }
 
-        /* Verification Badge */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(0, 255, 135, 0.1);
-            border: 1px solid rgba(0, 255, 135, 0.2);
-            color: #00ff87;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 100px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background: #00ff87;
-            border-radius: 50%;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0.3; }
-        }
-
-        /* Bold Branding */
-        .brand-name {
-            font-size: 34px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            background: linear-gradient(180deg, #ffffff 0%, #a5a5a8 100%);
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(to right, #00d4ff, #fff, #ff003c, #00d4ff);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: textShine 4s linear infinite;
         }
 
-        .sub-text {
-            color: #8e8e93;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 35px;
+        .live-badge {
+            background: #ff003c;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
+            animation: pulse-red 1s infinite alternate;
         }
 
-        /* High-Converting Glowing Action Button */
-        .action-link {
-            display: block;
-            background: #ffffff;
-            color: #000000;
-            text-decoration: none;
-            padding: 18px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 18px;
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15);
-            transition: all 0.2s ease;
-            margin-bottom: 35px;
+        .pred-val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 78px;
+            font-weight: 900;
+            margin: 15px 0;
+            text-align: center;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .val-big {
+            color: #ff003c;
+            text-shadow: 0 0 25px rgba(255, 0, 60, 0.7), 0 0 50px rgba(255, 0, 60, 0.3);
+            animation: textGlowRed 2s infinite alternate;
+        }
+        .val-small {
+            color: #00d4ff;
+            text-shadow: 0 0 25px rgba(0, 212, 255, 0.7), 0 0 50px rgba(0, 212, 255, 0.3);
+            animation: textGlowCyan 2s infinite alternate;
         }
 
-        .action-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.25);
+        .timer-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            color: #fff;
+            font-weight: 900;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px 28px;
+            border-radius: 15px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 10px;
+        }
+        .timer-warning {
+            color: #ff003c;
+            text-shadow: 0 0 20px #ff003c;
+            border-color: rgba(255, 0, 60, 0.4);
+            animation: pulse-red 0.4s infinite alternate;
         }
 
-        /* 2-Second Dynamic Progress & Timer Area */
-        .redirect-status {
-            font-size: 13px;
-            color: #8e8e93;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
+        .num-row {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 15px;
         }
 
-        #countdown-num {
-            color: #9b51e0; /* Violet Accent */
-            font-weight: 700;
+        .num-circle {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffea00;
+            border-radius: 12px; 
+            transform: rotate(45deg) translateZ(0);
+            will-change: transform;
+            background: rgba(255, 234, 0, 0.04);
+            box-shadow: 0 0 15px rgba(255, 234, 0, 0.15);
+            animation: floatDiamond 4s ease-in-out infinite alternate;
+        }
+        .num-circle span {
+            transform: rotate(-45deg); 
+            color: #ffea00;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            text-shadow: 0 0 12px rgba(255, 234, 0, 0.7);
         }
 
-        .progress-container {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.05);
+        .history-wrap {
+            max-height: 260px;
+            overflow-y: auto;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .history-wrap::-webkit-scrollbar { width: 5px; }
+        .history-wrap::-webkit-scrollbar-thumb { background: #00d4ff; border-radius: 10px; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 13px; font-weight: 500; }
+        th {
+            color: #fff;
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            position: sticky; top: 0;
+            background: rgba(10, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+        td { padding: 12px 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); text-align: center; }
+        
+        .win { color: #00ffaa; font-weight: bold; text-shadow: 0 0 10px rgba(0,255,170,0.3); }
+        .loss { color: #ff003c; font-weight: bold; text-shadow: 0 0 10px rgba(255,0,60,0.3); }
+        .jackpot { color: #ffea00; font-weight: bold; text-shadow: 0 0 15px #ffea00; }
+        
+        .auto-status {
+            font-size: 12px;
+            color: #00d4ff;
+            text-align: center;
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(0, 212, 255, 0.03);
             border-radius: 10px;
-            overflow: hidden;
-            max-width: 200px;
-            margin: 0 auto;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-
-        .progress-bar {
+        
+        button {
+            background: linear-gradient(45deg, #ff003c, #9900ff, #00d4ff);
+            background-size: 200% auto;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 14px;
+            cursor: pointer;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #ff3b30, #9b51e0, #00ff87);
-            transform-origin: left;
-            animation: loadProgress 2s linear forwards;
+            margin-top: 15px;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            animation: btnShine 4s linear infinite;
+            transition: transform 0.2s;
+        }
+        button:active { transform: scale(0.97); }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .stat-box {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            font-size: 11px;
+            color: #aaa;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .stat-number { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 900; margin-top: 5px; }
+        .win-stat { color: #00ffaa; text-shadow: 0 0 15px rgba(0,255,170,0.2); }
+        .loss-stat { color: #ff003c; text-shadow: 0 0 15px rgba(255,0,60,0.2); }
+        
+        .trademark {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(255,255,255,0.08);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+        .trademark a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(0,212,255,0.4);
         }
 
-        @keyframes loadProgress {
-            0% { transform: scaleX(0); }
-            100% { transform: scaleX(1); }
-        }
+        @keyframes floatCard { 0%, 100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-6px,0); } }
+        @keyframes sweepLine { 0% { left: -100%; } 100% { left: 100%; } }
+        @keyframes textShine { to { background-position: 200% center; } }
+        @keyframes btnShine { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes pulse-red { 0% { box-shadow: 0 0 8px rgba(255,0,60,0.3); } 100% { box-shadow: 0 0 20px rgba(255,0,60,0.7); } }
+        @keyframes textGlowRed { 0% { text-shadow: 0 0 15px rgba(255,0,60,0.4); } 100% { text-shadow: 0 0 30px rgba(255,0,60,0.9); } }
+        @keyframes textGlowCyan { 0% { text-shadow: 0 0 15px rgba(0,212,255,0.4); } 100% { text-shadow: 0 0 30px rgba(0,212,255,0.9); } }
+        @keyframes floatDiamond { 0% { transform: rotate(45deg) translate3d(0,0,0); } 100% { transform: rotate(45deg) translate3d(-5px,-5px,0); } }
     </style>
 </head>
 <body>
 
-    <div class="main-card">
-        <!-- Profile Frame -->
-        <div class="avatar-box">
-            <img src="logo.jpg" alt="TEAM LEGEND" class="logo-img">
+<div class="app-frame">
+    <div class="cyber-card">
+        <div class="header">
+            <span class="header-title">Dhruv Hack<span class="live-badge">LIVE</span></span>
         </div>
-
-        <!-- Dynamic Live Badge -->
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            VIP Server Connected
+        <div style="text-align:center;">
+            <div style="margin-bottom: 10px;"><div id="tmr" class="timer-display">00:60</div></div>
+            <div id="pID" style="color:#888;font-size:13px;margin-bottom:15px;font-weight: 700;letter-spacing: 1px;">CONNECTING TO CORE DATA NETWORK...</div>
+            
+            <div id="pRes" class="pred-val">---</div>
+            
+            <div style="font-family: 'Orbitron', sans-serif; font-size:11px; color:#ffea00; margin-bottom:15px; margin-top:25px; font-weight:900; letter-spacing:2px; display:flex; align-items:center; justify-content:center; gap:8px;">
+                <span>⚡</span> DYNAMIC AI NUMBERS <span>⚡</span>
+            </div>
+            <div class="num-row" id="nRow">
+                <div class="num-circle"><span>?</span></div>
+                <div class="num-circle"><span>?</span></div>
+            </div>
         </div>
-
-        <!-- Typography -->
-        <h1 class="brand-name">TEAM LEGEND</h1>
-        <p class="sub-text">Smart Prediction & Colour Analysis</p>
-
-        <!-- Main Button -->
-        <a href="https://t.me/itzdhruvcustom" class="action-link">
-            ENTER OFFICIAL CHANNEL
-        </a>
-
-        <!-- Live 2-Second Visual Countdown UI -->
-        <div class="redirect-status">
-            Redirecting in <span id="countdown-num">2</span>s...
+        
+        <div class="stats-row">
+            <div class="stat-box"><div>WINS</div><div class="stat-number win-stat" id="wC">0</div></div>
+            <div class="stat-box"><div>LOSSES</div><div class="stat-number loss-stat" id="lC">0</div></div>
+            <div class="stat-box"><div>ACCURACY</div><div class="stat-number" id="wR" style="color:#fff;">0%</div></div>
         </div>
-        <div class="progress-container">
-            <div class="progress-bar"></div>
-        </div>
+        
+        <div class="auto-status" id="aSts">🔄 Syncing with advanced encryption keys...</div>
     </div>
 
-    <!-- Active JavaScript for Real-time 2s Counter & Target Jump -->
-    <script>
-        let timeLeft = 2;
-        const countdownElement = document.getElementById('countdown-num');
-        const targetUrl = "https://t.me/itzdhruvcustom";
+    <div class="cyber-card" style="padding:15px; border-color:rgba(255,0,60,0.15); box-shadow:none; animation-delay: 0.5s;">
+        <div style="font-family:'Orbitron',sans-serif; font-size:12px; color:#ff003c; margin-bottom:12px; font-weight:900; letter-spacing:2px; text-align:center;">TERMINAL HISTORY</div>
+        <div class="history-wrap">
+            <table id="hTable">
+                <thead><tr><th>PERIOD</th><th>PRED</th><th>RESULT</th><th>STATUS</th></tr></thead>
+                <tbody id="hBody"><tr><td colspan="4">Loading terminal data...</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+    
+    <button onclick="resetAll()">SYSTEM PURGE (RESET LOGS)</button>
+    
+    <div class="trademark">
+        DEVELOPED BY <a href="https://t.me/itzdhruvcustom" target="_blank">Dhruv</a><br>
+        <a href="https://t.me/itzdhruvcustom" target="_blank" style="font-size: 10px; opacity: 0.7; text-transform: uppercase;">Join Prediction Channel</a>
+    </div>
+</div>
 
-        const downloadTimer = setInterval(function() {
-            timeLeft--;
-            if (timeLeft <= 0) {
-                clearInterval(downloadTimer);
-                countdownElement.textContent = "0";
-                window.location.href = targetUrl;
+<script>
+(function(){
+    document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
+    document.addEventListener('keydown',function(e){
+        if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='i'))||(e.ctrlKey&&(e.key==='u'||e.key==='U'))){e.preventDefault();return false;}
+    });
+    
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    document.addEventListener('click', initAudio, { once: true });
+    document.addEventListener('touchstart', initAudio, { once: true });
+
+    function playSound(type) {
+        try {
+            if (!audioCtx) return; 
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            let now = audioCtx.currentTime;
+
+            if (type === 'win') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, now); 
+                osc.frequency.setValueAtTime(880.00, now + 0.08); 
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            } 
+            else if (type === 'jackpot') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now); 
+                osc.frequency.setValueAtTime(659.25, now + 0.06); 
+                osc.frequency.setValueAtTime(783.99, now + 0.12); 
+                osc.frequency.setValueAtTime(1046.50, now + 0.18); 
+                gain.gain.setValueAtTime(0.18, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } 
+            else if (type === 'loss') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(160, now);
+                osc.frequency.exponentialRampToValueAtTime(55, now + 0.3);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            }
+        } catch (e) {
+            console.log("Audio Error:", e);
+        }
+    }
+
+    const API="https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+    let allRes=[],rounds=[],lastPred="BIG",lastNums=[6,8],lastPer=null,wC=0,lC=0,loaded=false;
+    
+    function getT(n){return parseInt(n)>=5?"BIG":"SMALL";}
+    
+    // RECTIFIED REAL-TIME TREND MATRIX
+    function getPred(){
+        if(allRes.length < 3) return "BIG"; // Scaled down fallback guard to avoid hardcoded loop
+        
+        let hist = allRes.map(r => getT(r.number));
+        let lastNum = parseInt(allRes[0].number);
+        let currentType = hist[0];
+        
+        // 1. Instant Dragon Line & Trend Ride Logic
+        let streak = 1;
+        for (let i = 1; i < hist.length; i++) {
+            if (hist[i] === currentType) streak++;
+            else break;
+        }
+        if (streak >= 2 && streak < 9) {
+            return currentType; // Dynamically locking trend line (Follows SSS or BBB instantly)
+        }
+        
+        // 2. Chop-Chop Checker
+        if (hist.length >= 4 && hist[0] !== hist[1] && hist[1] === hist[2] && hist[2] !== hist[3]) {
+            return currentType === "BIG" ? "SMALL" : "BIG";
+        }
+        
+        // 3. Density Adjuster
+        let sampleSize = Math.min(hist.length, 6);
+        let bigCount = hist.slice(0, sampleSize).filter(t => t === "BIG").length;
+        if (bigCount > sampleSize / 2) return "SMALL";
+        if (bigCount < sampleSize / 2) return "BIG";
+        
+        return lastNum % 2 === 0 ? "BIG" : "SMALL";
+    }
+
+    function getSugg(p){
+        let pool = p === "BIG" ? [5,6,7,8,9] : [0,1,2,3,4];
+        if(allRes.length < 3) return p === "BIG" ? [6,8] : [1,3];
+        
+        let recentNums = allRes.map(r => parseInt(r.number));
+        let weights = {};
+        
+        pool.forEach(n => {
+            weights[n] = 0;
+            recentNums.forEach((r, idx) => {
+                if(r === n) weights[n] += (recentNums.length - idx); 
+            });
+        });
+        
+        let sorted = pool.sort((a,b) => weights[b] - weights[a]);
+        return [Math.min(sorted[0], sorted[1]), Math.max(sorted[0], sorted[1])];
+    }
+
+    function updUI(){
+        if(allRes.length<1){
+            document.getElementById('pRes').innerHTML="---";
+            return;
+        }
+        let pred = getPred();
+        lastPred = pred;
+        
+        let pe = document.getElementById('pRes');
+        pe.innerHTML = pred;
+        pe.className = pred === "BIG" ? "pred-val val-big" : "pred-val val-small";
+        
+        let sug = getSugg(pred);
+        lastNums = sug;
+        
+        document.getElementById('nRow').innerHTML=`
+            <div class="num-circle"><span>${sug[0]}</span></div>
+            <div class="num-circle" style="animation-delay: 0.3s;"><span>${sug[1]}</span></div>
+        `;
+    }
+    
+    function updStats(){
+        document.getElementById('wC').innerHTML=wC;
+        document.getElementById('lC').innerHTML=lC;
+        let t = wC+lC;
+        let wr = t>0 ? Math.round((wC/t)*100) : 0;
+        document.getElementById('wR').innerHTML = wr+"%";
+    }
+    
+    function updHist(){
+        let tb = document.getElementById('hBody');
+        if(rounds.length===0){tb.innerHTML='<tr><td colspan="4">Awaiting server data...</td></tr>';return;}
+        let h='';
+        for(let i=rounds.length-1;i>=0;i--){
+            let r=rounds[i], cls=r.isWin?'win':'loss', txt=r.isWin?'WIN':'LOSS';
+            if(r.isJackpot){cls='jackpot';txt='JACKPOT';}
+            else if(r.isNumWin&&!r.isTypeWin){cls='win';txt='WIN (NUM)';}
+            h+=`<tr><td style="color:#888;">${r.period.slice(-6)}</td><td><strong>${r.predicted}</strong> <span style="font-size:9px;color:#666;">[${r.predNum}]</span></td><td>${r.number} <span style="font-size:9px;color:#666;">(${r.type})</span></td><td class="${cls}">${txt}</td></tr>`;
+        }
+        tb.innerHTML=h;
+        updStats();
+    }
+    
+    function procRes(per,num){
+        if(rounds.some(r=>r.period===per))return;
+        let actT=getT(num), isWin=false, isJack=false, isNumWin=false, isTypeWin=false, pred="N/A", pNum="N/A";
+        if(rounds.length>0||allRes.length>0){
+            pred=lastPred; pNum=lastNums.join(',');
+            let numMatch = lastNums.includes(parseInt(num));
+            let typeMatch = (pred===actT);
+            
+            isNumWin = numMatch; 
+            isTypeWin = typeMatch;
+            
+            let stsBox = document.getElementById('aSts');
+            
+            if(typeMatch&&numMatch){
+                isJack=true;isWin=true;wC++; 
+                stsBox.innerHTML=`⚡ JACKPOT HIT! [${num}]`; 
+                stsBox.style.color="#ffea00"; stsBox.style.borderColor="rgba(255,234,0,0.4)";
+                playSound('jackpot');
+            }
+            else if(typeMatch){
+                isWin=true;wC++; 
+                stsBox.innerHTML=`✅ PREDICTION SECURED [${actT}]`; 
+                stsBox.style.color="#00ffaa"; stsBox.style.borderColor="rgba(0,255,170,0.3)";
+                playSound('win');
+            }
+            else if(numMatch){
+                isWin=true;wC++; 
+                stsBox.innerHTML=`✅ NUMBER SECURED [${num}]`; 
+                stsBox.style.color="#00ffaa"; stsBox.style.borderColor="rgba(0,255,170,0.3)";
+                playSound('win');
+            }
+            else{
+                isWin=false;lC++; 
+                stsBox.innerHTML=`❌ TARGET MISSED [${actT}]`; 
+                stsBox.style.color="#ff003c"; stsBox.style.borderColor="rgba(255,0,60,0.3)";
+                playSound('loss');
+            }
+            
+            rounds.push({period:per, number:parseInt(num), type:actT, predicted:pred, predNum:pNum, isWin:isWin, isJackpot:isJack, isNumWin:isNumWin, isTypeWin:isTypeWin});
+        }else{
+            document.getElementById('aSts').innerHTML=`📡 Analyzing initial block... Standby.`;
+        }
+        updHist();
+    }
+    
+    async function loadData(){
+        try{
+            let r=await fetch(API+"?t="+Date.now()), d=await r.json();
+            if(d?.data?.list?.length){
+                allRes = d.data.list;
+                let lat = allRes[0];
+                document.getElementById('pID').innerHTML="NODE ID: " + lat.issueNumber.slice(-8) + " // LAST: " + lat.number;
+                updUI();
+                lastPer = lat.issueNumber;
+                loaded = true;
+            }
+        }catch(e){
+            document.getElementById('aSts').innerHTML="⚠️ Server Lag, Reconnecting...";
+            setTimeout(loadData,3000);
+        }
+    }
+    
+    async function checkNew(){
+        if(!loaded)return;
+        try{
+            let r=await fetch(API+"?t="+Date.now()), d=await r.json();
+            if(d?.data?.list?.length){
+                let lat=d.data.list[0], per=lat.issueNumber, num=parseInt(lat.number);
+                if(lastPer!==per){
+                    procRes(per,num);
+                    lastPer=per;
+                    allRes=d.data.list;
+                    updUI();
+                }
+            }
+        }catch(e){}
+    }
+    
+    function startTimer(){
+        setInterval(()=>{
+            let rem = 60 - new Date().getSeconds();
+            let t = document.getElementById('tmr');
+            t.innerText = `00:${rem<10?'0'+rem:rem}`;
+            if(rem <= 5) {
+                t.className = "timer-display timer-warning";
             } else {
-                countdownElement.textContent = timeLeft;
+                t.className = "timer-display";
             }
         }, 1000);
-    </script>
+    }
+    
+    window.resetAll=function(){
+        if(confirm("⚠ WARNING: Reset terminal statistics?")){
+            rounds=[]; wC=0; lC=0; updHist(); loadData();
+            let aSts = document.getElementById('aSts');
+            aSts.innerHTML="🔄 Logs Purged. Rebooting...";
+            aSts.style.color="#00d4ff";
+            aSts.style.borderColor="rgba(0,212,255,0.2)";
+        }
+    };
+    
+    startTimer();
+    loadData();
+    setInterval(checkNew, 3000);
+})();
+</script>
 </body>
 </html>
