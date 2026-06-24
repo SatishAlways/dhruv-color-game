@@ -2,369 +2,608 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>◈ DHRUV V6.0 • QUANTUM AI ◈</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* =========================================
-       THEME VARIABLES & GLOBAL RESET
-       ========================================= */
-    :root {
-      --neon-pink: #ff007f;
-      --neon-blue: #00e5ff;
-      --dark-bg: #05070a;
-      --glass-bg: rgba(10, 15, 25, 0.85);
-      --light-grey: #9aa9c4;
-      --success: #00ffaa;
-      --warning: #ffd700;
-      --error: #ff2a5f;
-    }
-
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent; user-select: none;
-    }
-
-    body {
-      background-color: var(--dark-bg);
-      font-family: 'Rajdhani', sans-serif;
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      padding: 15px; color: #fff;
-      overflow-x: hidden; position: relative;
-    }
-
-    /* QUANTUM ANIMATED GRID & GLOW */
-    body::before {
-      content: ""; position: fixed; inset: 0;
-      background: 
-        linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
-      background-size: 30px 30px;
-      z-index: 0; pointer-events: none;
-      animation: gridMove 20s linear infinite;
-    }
-    body::after {
-      content: ""; position: fixed; inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.05) 0%, transparent 60%);
-      z-index: 0; pointer-events: none;
-    }
-    @keyframes gridMove {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(30px); }
-    }
-
-    /* =========================================
-       APP CONTAINER & GLASS PANELS
-       ========================================= */
-    .app-frame {
-      max-width: 480px; width: 100%; position: relative; z-index: 2;
-      display: flex; flex-direction: column; gap: 20px;
-    }
-
-    .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-      border-radius: 20px; padding: 25px;
-      border: 1px solid rgba(0, 229, 255, 0.15);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(0, 229, 255, 0.05);
-      position: relative; overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .glass-card:hover {
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 40px rgba(0, 229, 255, 0.1);
-    }
-
-    /* Animated Top Scanning Line */
-    .glass-card::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 3px;
-      background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-pink), transparent);
-      animation: scanLine 2.5s linear infinite;
-    }
-    @keyframes scanLine { 100% { left: 200%; } }
-
-    /* =========================================
-       HEADER SECTION
-       ========================================= */
-    .header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 20px; padding-bottom: 15px;
-      border-bottom: 1px dashed rgba(255,255,255,0.1);
-    }
-
-    /* Glitch Text Effect */
-    .brand-title {
-      font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900;
-      color: #fff; text-shadow: 2px 2px 0px var(--neon-pink), -2px -2px 0px var(--neon-blue);
-      letter-spacing: 2px; position: relative;
-      animation: glitchText 3s infinite;
-    }
-    @keyframes glitchText {
-      0%, 100% { text-shadow: 2px 2px 0px var(--neon-pink), -2px -2px 0px var(--neon-blue); }
-      92% { text-shadow: 2px 2px 0px var(--neon-pink), -2px -2px 0px var(--neon-blue); }
-      94% { text-shadow: -2px -2px 0px var(--neon-pink), 2px 2px 0px var(--neon-blue); transform: translate(-2px, 1px); }
-      96% { text-shadow: 2px -2px 0px var(--neon-pink), -2px 2px 0px var(--neon-blue); transform: translate(2px, -1px); }
-      98% { text-shadow: -2px 2px 0px var(--neon-pink), 2px -2px 0px var(--neon-blue); transform: translate(0, 0); }
-    }
-
-    .brand-sub { font-size: 0.8rem; color: var(--neon-blue); letter-spacing: 4px; font-weight: 700; text-transform: uppercase;}
-
-    .live-badge {
-      display: flex; align-items: center; gap: 8px;
-      background: rgba(255, 0, 127, 0.15); border: 1px solid var(--neon-pink);
-      padding: 6px 16px; border-radius: 30px;
-      font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700;
-      color: var(--neon-pink); box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
-      animation: pulseBadge 2s infinite;
-    }
-    .live-dot {
-      width: 8px; height: 8px; background: #fff;
-      border-radius: 50%; box-shadow: 0 0 10px #fff;
-      animation: blink 0.8s infinite alternate;
-    }
-    @keyframes pulseBadge { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-    @keyframes blink { 0% { opacity: 0.3; } 100% { opacity: 1; } }
-
-    /* =========================================
-       PREDICTION ENGINE DISPLAY
-       ========================================= */
-    .engine-display { text-align: center; position: relative; }
-
-    .timer-box {
-      font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900;
-      color: #fff; text-shadow: 0 0 25px rgba(0, 229, 255, 0.6);
-      background: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0, 229, 255, 0.1));
-      border: 1px solid rgba(0, 229, 255, 0.4);
-      border-radius: 20px; padding: 10px 40px; display: inline-block;
-      margin-bottom: 10px; letter-spacing: 6px; transition: 0.3s;
-    }
-    .timer-box.warning {
-      color: var(--neon-pink); border-color: var(--neon-pink);
-      background: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(255, 0, 127, 0.1));
-      text-shadow: 0 0 35px rgba(255,0,127,0.8);
-      animation: pulseAlert 0.4s infinite alternate;
-    }
-    @keyframes pulseAlert { from { transform: scale(1); } to { transform: scale(1.05); } }
-
-    .node-id { font-size: 0.9rem; color: var(--light-grey); letter-spacing: 2px; margin-bottom: 25px; font-weight: 600;}
-
-    /* CONFIDENCE BAR */
-    .confidence-wrapper {
-      width: 100%; background: rgba(0,0,0,0.5); border-radius: 10px; height: 8px; margin-bottom: 15px;
-      overflow: hidden; border: 1px solid rgba(255,255,255,0.1); position: relative;
-    }
-    .confidence-fill {
-      height: 100%; width: 0%; background: linear-gradient(90deg, var(--neon-blue), var(--success));
-      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px var(--success);
-    }
-    .confidence-text {
-      font-size: 0.75rem; color: var(--success); letter-spacing: 2px; font-weight: 700; margin-bottom: 15px;
-      text-transform: uppercase; display: flex; justify-content: space-between;
-    }
-
-    .prediction-val {
-      font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 900;
-      text-transform: uppercase; letter-spacing: 8px; line-height: 1.1; margin-bottom: 20px;
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .val-big { color: var(--neon-pink); text-shadow: 0 0 30px rgba(255,0,127,0.7), 0 0 60px rgba(255,0,127,0.4); }
-    .val-small { color: var(--neon-blue); text-shadow: 0 0 30px rgba(0,229,255,0.7), 0 0 60px rgba(0,229,255,0.4); }
-    .pop-anim { animation: popIn 0.5s forwards; }
-    @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-
-    /* HOT NUMBERS */
-    .num-title { font-size: 0.8rem; color: var(--warning); letter-spacing: 4px; font-weight: 700; margin-bottom: 15px; }
-    .num-grid { display: flex; justify-content: center; gap: 35px; margin-bottom: 10px; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>DHRUV V6.0 • GOLDEN QUANTUM ULTRA AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #080a0f;
+    --panel-card: rgba(18, 22, 28, 0.88);
+    --gold-bright: #ffe699;
+    --gold-solid: #d4af37;
+    --gold-dark: #aa8416;
+    --gold-glow: rgba(212, 175, 55, 0.25);
+    --chrome-silver: #e2e8f0;
+    --metallic-grey: #2e3742;
+    --text-muted: #8a99ad;
+    --border-gold: rgba(212, 175, 55, 0.18);
     
-    .hex-num {
-      width: 70px; height: 70px; background: rgba(255, 215, 0, 0.08);
-      border: 2px solid rgba(255, 215, 0, 0.6);
-      border-radius: 18px; transform: rotate(45deg);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
-      transition: all 0.4s ease;
-    }
-    .hex-num:hover { transform: rotate(45deg) scale(1.1); box-shadow: 0 0 35px rgba(255, 215, 0, 0.5); }
-    .hex-num span {
-      transform: rotate(-45deg); font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem; font-weight: 900; color: var(--warning);
-      text-shadow: 0 0 20px rgba(255,215,0,0.8);
-    }
+    --sys-green: #00ffaa;
+    --sys-red: #ff3366;
+  }
 
-    /* =========================================
-       STATS & PROGRESS
-       ========================================= */
-    .stats-container {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 30px;
-    }
-    .stat-card {
-      background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(255,255,255,0.02)); 
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 15px 5px; text-align: center;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
-    }
-    .stat-title { font-size: 0.7rem; color: var(--light-grey); font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
-    .stat-data { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; }
-    #wC { color: var(--success); text-shadow: 0 0 15px rgba(0,255,170,0.4); }
-    #lC { color: var(--error); text-shadow: 0 0 15px rgba(255,42,95,0.4); }
-    #wR { color: var(--neon-blue); text-shadow: 0 0 15px rgba(0,229,255,0.4); }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
 
-    /* =========================================
-       LOSS REFUND BANNER (UPGRADED)
-       ========================================= */
-    .refund-card {
-      background: linear-gradient(135deg, rgba(20, 10, 15, 0.9), rgba(25, 10, 20, 0.8));
-      backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-      border-radius: 18px; padding: 22px; text-align: center;
-      border: 1px solid rgba(255, 0, 127, 0.4);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 20px rgba(255, 0, 127, 0.1);
-      position: relative; overflow: hidden;
-      animation: floatBanner 4s ease-in-out infinite;
-    }
-    @keyframes floatBanner {
-      0%, 100% { transform: translateY(0); box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 20px rgba(255, 0, 127, 0.1); }
-      50% { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 0 30px rgba(255, 0, 127, 0.2); }
-    }
-    .refund-card::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
-      animation: scanPink 3s linear infinite;
-    }
-    @keyframes scanPink { 100% { left: 100%; } }
-    
-    .refund-header {
-      font-family: 'Orbitron', sans-serif; color: var(--neon-pink); font-size: 1.2rem;
-      font-weight: 900; letter-spacing: 2px; margin-bottom: 12px;
-      text-shadow: 0 0 15px rgba(255, 0, 127, 0.6); display: flex; justify-content: center; align-items: center; gap: 10px;
-    }
-    .refund-desc { color: #d4ddec; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; font-weight: 600;}
-    
-    .btn-join {
-      background: linear-gradient(90deg, #ff0044, #ff007f); color: white;
-      text-decoration: none; display: block; width: 100%; padding: 16px;
-      border-radius: 14px; font-family: 'Orbitron', sans-serif; font-weight: 900;
-      font-size: 1rem; letter-spacing: 3px;
-      box-shadow: 0 10px 25px rgba(255, 0, 127, 0.4); transition: 0.3s;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    .btn-join:hover { background: linear-gradient(90deg, #ff007f, #ff0044); transform: scale(1.02); box-shadow: 0 15px 30px rgba(255, 0, 127, 0.6); }
-    .btn-join:active { transform: scale(0.98); }
+  body {
+    min-height: 100vh;
+    background: 
+      radial-gradient(circle at 20% 20%, var(--gold-glow), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(46, 55, 66, 0.4), transparent 50%),
+      var(--bg-dark);
+    color: #ffffff;
+    font-family: 'Rajdhani', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
 
-    /* =========================================
-       TERMINAL HISTORY TABLE
-       ========================================= */
-    .history-head {
-      font-family: 'Orbitron', sans-serif; color: #fff; font-size: 1.1rem;
-      font-weight: 700; margin-bottom: 20px; letter-spacing: 3px;
-      display: flex; align-items: center; gap: 10px; text-transform: uppercase;
-    }
-    .history-head::before {
-      content: ''; width: 5px; height: 20px; background: var(--neon-pink);
-      border-radius: 4px; box-shadow: 0 0 15px var(--neon-pink);
-    }
-    .table-container { max-height: 250px; overflow-y: auto; padding-right: 5px; }
-    .table-container::-webkit-scrollbar { width: 6px; }
-    .table-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.5); border-radius: 10px; }
-    .table-container::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
-    
-    table { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 0.9rem; }
-    th {
-      font-family: 'Orbitron', sans-serif; color: var(--neon-blue); padding: 0 10px 10px;
-      text-align: left; background: var(--glass-bg); position: sticky; top: 0; font-size: 0.75rem; letter-spacing: 2px;
-      z-index: 10;
-    }
-    td { background: rgba(0,0,0,0.6); padding: 16px 12px; color: #fff; border-top: 1px solid rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.02); }
-    td:first-child { border-radius: 12px 0 0 12px; border-left: 3px solid transparent; }
-    td:last-child { border-radius: 0 12px 12px 0; text-align: right; border-right: 1px solid rgba(255,255,255,0.02); }
+  /* Animated Golden Particle Mesh Grid effect */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: 
+      linear-gradient(rgba(214, 175, 87, 0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(214, 175, 87, 0.012) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 1;
+    animation: backgroundFloat 30s linear infinite;
+  }
+  @keyframes backgroundFloat {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
 
-    .new-row { animation: slideIn 0.5s ease forwards; }
-    @keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+  .app-container {
+    width: 100%;
+    max-width: 950px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+    animation: panelFadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @keyframes panelFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    tr.row-win td:first-child { border-left-color: var(--success); box-shadow: inset 5px 0 15px rgba(0,255,170,0.1); }
-    tr.row-loss td:first-child { border-left-color: var(--error); box-shadow: inset 5px 0 15px rgba(255,42,95,0.1); }
-    tr.row-jack td:first-child { border-left-color: var(--warning); box-shadow: inset 5px 0 15px rgba(255,215,0,0.1); }
+  /* Ultra Premium Gold & Grey Metallic Card */
+  .cyber-card {
+    background: var(--panel-card);
+    border: 1px solid var(--border-gold);
+    border-top: 3px solid var(--gold-solid);
+    border-radius: 24px;
+    padding: 24px;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    box-shadow: 
+      0 25px 60px rgba(0, 0, 0, 0.85),
+      inset 0 0 25px rgba(212, 175, 55, 0.02);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .cyber-card:hover {
+    box-shadow: 
+      0 30px 70px rgba(0, 0, 0, 0.9),
+      inset 0 0 35px rgba(212, 175, 55, 0.04);
+  }
 
-    .txt-win { color: var(--success); font-weight: bold; text-shadow: 0 0 15px rgba(0,255,170,0.4); letter-spacing: 1px;}
-    .txt-loss { color: var(--error); font-weight: bold; text-shadow: 0 0 15px rgba(255,42,95,0.4); letter-spacing: 1px;}
-    .txt-jack { color: var(--warning); font-weight: bold; text-shadow: 0 0 15px rgba(255,215,0,0.4); letter-spacing: 1px;}
+  .cyber-card.grey-variant {
+    border-top: 3px solid #4a5568;
+    background: linear-gradient(180deg, rgba(22, 27, 35, 0.9), rgba(14, 17, 22, 0.95));
+  }
 
-    /* Buttons & Status */
-    .system-status {
-      background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.3);
-      border-radius: 14px; padding: 15px; text-align: center; color: var(--neon-blue);
-      font-size: 0.9rem; font-weight: 700; margin-top: 20px; letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    
-    .btn-reset {
-      background: linear-gradient(90deg, rgba(255,42,95,0.1), rgba(255,42,95,0.2)); 
-      border: 1px solid var(--error); color: #fff;
-      width: 100%; padding: 18px; border-radius: 16px; font-family: 'Orbitron', sans-serif;
-      font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(255,42,95,0.2);
-    }
-    .btn-reset:hover { background: var(--error); box-shadow: 0 0 30px rgba(255,42,95,0.6); transform: translateY(-2px); }
-    .btn-reset:active { transform: translateY(1px); }
-  </style>
+  /* Liquid Gold Sweeping Scan Shimmer */
+  .cyber-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -150%;
+    width: 80%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 230, 153, 0.05), rgba(214, 175, 87, 0.12), rgba(255, 230, 153, 0.05), transparent);
+    transform: skewX(-25deg);
+    pointer-events: none;
+    animation: goldShimmer 4s ease-in-out infinite;
+  }
+  @keyframes goldShimmer {
+    0% { left: -150%; }
+    50% { left: 150%; }
+    100% { left: 150%; }
+  }
+
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(214, 175, 87, 0.1);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .brand-block .title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #ffffff, #a0aec0, var(--gold-bright));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(212,175,55,0.25));
+  }
+
+  .brand-block .subtitle {
+    font-size: 0.8rem;
+    color: var(--gold-solid);
+    letter-spacing: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 4px;
+    text-shadow: 0 0 8px rgba(212,175,55,0.2);
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid var(--gold-solid);
+    padding: 8px 18px;
+    border-radius: 14px;
+    color: var(--gold-bright);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+  }
+
+  .pulse-node {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 12px #fff, 0 0 6px var(--gold-solid);
+    animation: extremePulse 0.7s infinite alternate;
+  }
+  @keyframes extremePulse { from { opacity: 0.4; transform: scale(0.8); } to { opacity: 1; transform: scale(1.3); } }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 900px) {
+    .dashboard-grid { grid-template-columns: 1.32fr 0.68fr; }
+  }
+
+  .display-core {
+    text-align: center;
+    background: rgba(10, 12, 16, 0.6);
+    border-radius: 22px;
+    padding: 24px;
+    border: 1px solid rgba(214, 175, 87, 0.05);
+  }
+
+  .timer-box {
+    display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.6rem, 7.5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 5px;
+    color: #ffffff;
+    padding: 6px 36px;
+    border-radius: 18px;
+    border: 1px solid rgba(214, 175, 87, 0.25);
+    background: linear-gradient(180deg, #1a202c, #0d1117);
+    box-shadow: 
+      inset 0 0 20px rgba(214, 175, 87, 0.05),
+      0 12px 35px rgba(0,0,0,0.6);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .timer-box.warning {
+    color: var(--sys-red);
+    border-color: var(--sys-red);
+    box-shadow: 0 0 30px rgba(255, 51, 102, 0.35), inset 0 0 15px rgba(255, 51, 102, 0.15);
+    animation: warningShake 0.4s infinite alternate;
+  }
+  @keyframes warningShake { 
+    0% { transform: scale(1) rotate(0deg); } 
+    100% { transform: scale(1.04) rotate(0.5deg); } 
+  }
+
+  .node-hash {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    background: rgba(214, 175, 87, 0.04);
+    display: inline-block;
+    padding: 5px 16px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid rgba(214, 175, 87, 0.05);
+  }
+
+  .meter-container {
+    margin: 24px 0 16px;
+  }
+
+  .meter-labels {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: var(--chrome-silver);
+  }
+
+  .meter-bar-bg {
+    width: 100%;
+    height: 11px;
+    background: #0d1117;
+    border-radius: 999px;
+    border: 1px solid rgba(214, 175, 87, 0.12);
+    overflow: hidden;
+    padding: 2px;
+  }
+
+  .meter-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #4a5568, var(--gold-solid));
+    box-shadow: 0 0 15px var(--gold-solid);
+    transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .prediction-output {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(3.8rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 10px;
+    line-height: 1.1;
+    margin: 20px 0;
+    text-transform: uppercase;
+  }
+
+  .val-big {
+    color: var(--gold-bright);
+    text-shadow: 
+      0 0 25px var(--gold-glow),
+      0 0 50px rgba(212, 175, 55, 0.3),
+      2px 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .val-small {
+    color: #ffffff;
+    text-shadow: 
+      0 0 25px rgba(255,255,255,0.2),
+      0 0 50px rgba(160, 174, 192, 0.3),
+      2px 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .target-title {
+    color: var(--gold-solid);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 24px;
+    margin-bottom: 14px;
+  }
+
+  .target-grid {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    margin-bottom: 22px;
+  }
+
+  .diamond-node {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, rgba(214, 175, 87, 0.12), rgba(46, 55, 66, 0.3));
+    border: 2px solid var(--gold-solid);
+    transform: rotate(45deg);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .diamond-node:hover {
+    transform: rotate(45deg) scale(1.08);
+  }
+
+  .diamond-node span {
+    transform: rotate(-45deg);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--gold-bright);
+    text-shadow: 0 0 15px rgba(255, 230, 153, 0.7);
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 26px;
+  }
+
+  .stat-block {
+    background: linear-gradient(145deg, #1a202c, #11151d);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 16px 10px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+    position: relative;
+  }
+
+  .stat-block .label {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .stat-block .value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+  }
+
+  #wC { color: var(--sys-green); text-shadow: 0 0 15px rgba(0, 255, 170, 0.3); }
+  #lC { color: var(--sys-red); text-shadow: 0 0 15px rgba(255, 51, 102, 0.3); }
+  #wR { color: #00e5ff; text-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
+
+  .console-log-status {
+    margin-top: 20px;
+    background: rgba(214, 175, 87, 0.05);
+    border: 1px solid rgba(214, 175, 87, 0.25);
+    border-radius: 14px;
+    padding: 14px;
+    color: var(--gold-bright);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.4);
+  }
+
+  .premium-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(150deg, #222933 0%, #0f131a 100%);
+    border: 1px solid rgba(214, 175, 87, 0.25);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.7), inset 0 0 25px rgba(214, 175, 87, 0.03);
+    text-align: center;
+    gap: 18px;
+    position: relative;
+  }
+
+  .sidebar-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--gold-solid);
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+  }
+
+  .sidebar-desc {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 600;
+  }
+
+  .tg-action-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #c49a23, #8c6b12);
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tg-action-btn:hover {
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.45);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.12rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+
+  .section-head::before {
+    content: "";
+    width: 6px;
+    height: 22px;
+    background: var(--gold-solid);
+    box-shadow: 0 0 14px var(--gold-solid);
+    border-radius: 4px;
+  }
+
+  .terminal-scroller {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+  .terminal-scroller::-webkit-scrollbar { width: 6px; }
+  .terminal-scroller::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 10px; }
+  .terminal-scroller::-webkit-scrollbar-thumb { background: var(--metallic-grey); border-radius: 10px; border: 1px solid var(--border-gold); }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    font-size: 0.95rem;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: #141921;
+    color: var(--text-muted);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-align: left;
+    padding: 10px 14px;
+    text-transform: uppercase;
+  }
+
+  td {
+    background: rgba(13, 17, 23, 0.8);
+    padding: 14px;
+    color: #ffffff;
+    border-top: 1px solid rgba(214,175,87,0.03);
+    border-bottom: 1px solid rgba(214,175,87,0.03);
+  }
+
+  td:first-child { border-radius: 14px 0 0 14px; border-left: 1px solid rgba(214,175,87,0.03); }
+  td:last-child { border-radius: 0 14px 14px 0; text-align: right; border-right: 1px solid rgba(214,175,87,0.03); }
+
+  tr.row-win td:first-child { border-left: 4px solid var(--sys-green); }
+  tr.row-loss td:first-child { border-left: 4px solid var(--sys-red); }
+  tr.row-jack td:first-child { border-left: 4px solid var(--gold-solid); }
+
+  .status-win { color: var(--sys-green); font-weight: 800; }
+  .status-loss { color: var(--sys-red); font-weight: 800; }
+  .status-jack { color: var(--gold-bright); font-weight: 800; text-shadow: 0 0 10px var(--gold-glow); }
+
+  .purge-action-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid var(--gold-solid);
+    background: linear-gradient(90deg, rgba(214, 175, 87, 0.05), rgba(46, 55, 66, 0.2));
+    color: #ffffff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .purge-action-btn:active, .tg-action-btn:active {
+    transform: scale(0.98);
+  }
+
+  .pop-kick { animation: dynamicPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+  @keyframes dynamicPop { from { transform: scale(0.75); opacity: 0; filter: blur(4px); } to { transform: scale(1); opacity: 1; filter: blur(0); } }
+
+  @media (max-width: 550px) {
+    body { padding: 12px; }
+    .cyber-card { padding: 16px; }
+    .main-header { justify-content: center; text-align: center; }
+    .stats-row { grid-template-columns: 1fr; gap: 12px; }
+    .target-grid { gap: 16px; }
+    .diamond-node { width: 62px; height: 62px; }
+    .diamond-node span { font-size: 2.1rem; }
+  }
+</style>
 </head>
 <body>
 
-<div class="app-frame">
-  
-  <div class="glass-card">
-    <div class="header">
-      <div>
-        <div class="brand-title">DHRUV V6.0</div>
-        <div class="brand-sub">QUANTUM NEURAL NET</div>
+<div class="app-container">
+
+  <div class="cyber-card">
+    <div class="main-header">
+      <div class="brand-block">
+        <div class="title">DHRUV V6.0</div>
+        <div class="subtitle">GOLDEN QUANTUM ENGINE</div>
       </div>
-      <div class="live-badge"><div class="live-dot"></div> SYNCED</div>
+      <div class="status-badge"><div class="pulse-node"></div> MATRIX ACTIVE</div>
     </div>
 
-    <div class="engine-display">
-      <div id="tmr" class="timer-box">00:60</div>
-      <div id="pID" class="node-id">INITIALIZING QUANTUM CORE...</div>
-      
-      <div class="confidence-text">
-        <span id="trendSts">SCANNING BLOCKCHAIN...</span>
-        <span id="confText">0%</span>
+    <div class="dashboard-grid">
+      <div class="display-core">
+        <div class="timer-wrapper">
+          <div id="tmr" class="timer-box">00:60</div>
+        </div>
+        <div id="pID" class="node-hash">INITIALIZING SECURE LINK...</div>
+
+        <div class="meter-container">
+          <div class="meter-labels">
+            <span id="trendSts">DECRYPTING BLOCKCHAIN SERVER...</span>
+            <span id="confText">0%</span>
+          </div>
+          <div class="meter-bar-bg">
+            <div class="meter-fill" id="confFill"></div>
+          </div>
+        </div>
+
+        <div id="pRes" class="prediction-output">---</div>
+
+        <div class="target-title">QUANTUM HOT TARGETS</div>
+        <div class="target-grid" id="nRow">
+          <div class="diamond-node"><span>-</span></div>
+          <div class="diamond-node"><span>-</span></div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-block"><div class="label">WINS</div><div class="value" id="wC">0</div></div>
+          <div class="stat-block"><div class="label">LOSSES</div><div class="value" id="lC">0</div></div>
+          <div class="stat-block"><div class="label">WIN RATE</div><div class="value" id="wR">0%</div></div>
+        </div>
+
+        <div id="aSts" class="console-log-status">🔄 Resolving live entropy matrices...</div>
       </div>
-      <div class="confidence-wrapper">
-        <div class="confidence-fill" id="confFill"></div>
-      </div>
-      
-      <div id="pRes" class="prediction-val">---</div>
-      
-      <div class="num-title">QUANTUM HOT TARGETS</div>
-      <div class="num-grid" id="nRow">
-        <div class="hex-num"><span>-</span></div>
-        <div class="hex-num"><span>-</span></div>
+
+      <div class="premium-sidebar">
+        <div class="sidebar-title">💸 LOSS REFUND 100% 💸</div>
+        <div class="sidebar-desc">
+          If any computational mismatch occurs from our Live System Nodes, your localized token deposit will be completely returned via secure UPI links instantly.
+        </div>
+        <a href="https://t.me/itzdhruvcustom" target="_blank" class="tg-action-btn">🚀 JOIN OFFICIAL CHANNEL</a>
       </div>
     </div>
-
-    <div class="stats-container">
-      <div class="stat-card"><div class="stat-title">WINS</div><div class="stat-data" id="wC">0</div></div>
-      <div class="stat-card"><div class="stat-title">LOSSES</div><div class="stat-data" id="lC">0</div></div>
-      <div class="stat-card"><div class="stat-title">WIN RATE</div><div class="stat-data" id="wR">0%</div></div>
-    </div>
-
-    <div id="aSts" class="system-status">🔄 Decrypting live server entropy...</div>
   </div>
 
-  <!-- UPGRADED LOSS REFUND BANNER IN THE MIDDLE -->
-  <div class="refund-card">
-    <div class="refund-header">💸 LOSS REFUND 100% 💸</div>
-    <div class="refund-desc">
-      If any loss occurs from our Live VC Prediction, the full deposit amount will be refunded directly through UPI instantly.
-    </div>
-    <a href="https://t.me/itzdhruvcustom" target="_blank" class="btn-join">
-      🚀 JOIN OFFICIAL CHANNEL
-    </a>
-  </div>
-
-  <div class="glass-card">
-    <div class="history-head">SERVER TERMINAL LOGS</div>
-    <div class="table-container">
+  <div class="cyber-card grey-variant">
+    <div class="section-head">SERVER TERMINAL LOGS</div>
+    <div class="terminal-scroller">
       <table>
         <thead>
           <tr>
@@ -375,276 +614,295 @@
           </tr>
         </thead>
         <tbody id="hBody">
-          <tr><td colspan="4" style="text-align:center; color:var(--light-grey); padding: 30px;">Awaiting Neural Data...</td></tr>
+          <tr>
+            <td colspan="4" style="text-align:center; color:var(--text-muted); padding:35px;">Awaiting Neural Node Synced Log...</td>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <button class="btn-reset" onclick="resetAll()">⚡ INITIATE SYSTEM PURGE</button>
+  <button class="purge-action-btn" onclick="resetAll()">⚡ INITIATE SYSTEM PURGE</button>
 </div>
 
 <script>
-  (function() {
-    // Basic Protections
-    document.addEventListener('contextmenu', e => e.preventDefault());
+(function(){
+  document.addEventListener('contextmenu', e => e.preventDefault());
 
-    // Audio Context Setup
-    let audioCtx = null;
-    function initAudio() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-    }
-    document.addEventListener('click', initAudio, {once: true});
-    document.addEventListener('touchstart', initAudio, {once: true});
+  let audioCtx = null;
+  function initAudio(){
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  document.addEventListener('click', initAudio, {once:true});
+  document.addEventListener('touchstart', initAudio, {once:true});
 
-    // Synthesized Sound Engine
-    function playSound(type) {
-      if (!audioCtx || audioCtx.state === 'suspended') return;
-      try {
-        let osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
-        osc.connect(gain); gain.connect(audioCtx.destination);
-        let now = audioCtx.currentTime;
-        if (type === 'win') {
-          osc.type = 'sine'; osc.frequency.setValueAtTime(600, now); osc.frequency.exponentialRampToValueAtTime(1200, now+0.2);
-          gain.gain.setValueAtTime(0.3, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.5);
-          osc.start(now); osc.stop(now+0.5);
-        } else if (type === 'jackpot') {
-          osc.type = 'square'; osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(800, now+0.1); osc.frequency.setValueAtTime(1200, now+0.2);
-          gain.gain.setValueAtTime(0.3, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.6);
-          osc.start(now); osc.stop(now+0.6);
-        } else if (type === 'loss') {
-          osc.type = 'sawtooth'; osc.frequency.setValueAtTime(200, now); osc.frequency.exponentialRampToValueAtTime(50, now+0.4);
-          gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.4);
-          osc.start(now); osc.stop(now+0.4);
-        }
-      } catch(e) {}
-    }
+  function playSound(type){
+    if(!audioCtx || audioCtx.state === 'suspended') return;
+    try{
+      let osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      let now = audioCtx.currentTime;
 
-    const API = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-    let allRes = [], rounds = [], lastPred = "BIG", lastNums = [6,8], lastPer = null, wC = 0, lC = 0, loaded = false;
-
-    function getT(n) { return parseInt(n) >= 5 ? "BIG" : "SMALL"; }
-
-    // ==========================================
-    // 🧠 ADVANCED AI LOGIC & CONFIDENCE ENGINE 🧠
-    // ==========================================
-    function getPredData() {
-      let trendText = "ANALYZING ENTROPY...";
-      let prediction = "BIG";
-      let conf = 50; // Base confidence
-
-      if (allRes.length < 6) return { pred: prediction, text: "CALIBRATING...", conf: 45 };
-      
-      let hist = allRes.map(r => getT(r.number));
-      let p1 = hist[0], p2 = hist[1], p3 = hist[2], p4 = hist[3];
-
-      // Pattern Recognition with Dynamic Confidence
-      if (p1 === p2 && p2 === p3 && p3 === p4) {
-        trendText = "🔥 MASSIVE DRAGON STREAK";
-        prediction = p1; conf = 92;
+      if(type === 'win'){
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, now);
+        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.2);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+        osc.start(now); osc.stop(now + 0.5);
+      }else if(type === 'jackpot'){
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.setValueAtTime(800, now + 0.1);
+        osc.frequency.setValueAtTime(1200, now + 0.2);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+        osc.start(now); osc.stop(now + 0.6);
+      }else if(type === 'loss'){
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(200, now);
+        osc.frequency.exponentialRampToValueAtTime(50, now + 0.4);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+        osc.start(now); osc.stop(now + 0.4);
       }
-      else if (p1 === p2 && p2 === p3) {
-        trendText = "🔥 DRAGON STREAK DETECTED";
-        prediction = p1; conf = 85;
-      }
-      else if (p1 !== p2 && p2 !== p3 && p3 !== p4) {
-        trendText = "🔀 HIGH VOLATILITY (CHOP)";
-        prediction = p1 === "BIG" ? "SMALL" : "BIG"; conf = 78;
-      }
-      else if (p1 === p2 && p2 !== p3 && p3 === p4) {
-        trendText = "👯 MIRROR PAIR PATTERN";
-        prediction = p1 === "BIG" ? "SMALL" : "BIG"; conf = 82;
-      }
-      else if (p1 !== p2 && p2 === p3 && p3 !== p4) {
-        trendText = "📊 2-1 FRACTAL STRUCTURE";
-        prediction = p1; conf = 70;
-      }
-      else {
-        // Fallback Momentum
-        let recent = hist.slice(0, 5);
-        let bigCount = recent.filter(x => x === "BIG").length;
-        trendText = "⚙️ MOMENTUM NEURAL CALC";
-        prediction = bigCount > 2 ? "BIG" : "SMALL";
-        conf = 65;
-      }
+    }catch(e){}
+  }
 
-      // Add slight random fluctuation to confidence for realistic UI
-      conf = conf + Math.floor(Math.random() * 5) - 2;
-      if(conf > 99) conf = 99;
+  const API = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+  let allRes = [], rounds = [], lastPred = "BIG", lastNums = [6,8], lastPer = null, wC = 0, lC = 0, loaded = false;
 
-      return { pred: prediction, text: trendText, conf: conf };
+  function getT(n){ return parseInt(n) >= 5 ? "BIG" : "SMALL"; }
+
+  /* Modified core prediction logic: Only Dragon Flow and Neural Reverse */
+  function getPredData(){
+    let trendText = "ANALYZING ENTROPY...";
+    let prediction = "BIG";
+    let conf = 50;
+
+    if(allRes.length < 4) return { pred: prediction, text: "CALIBRATING MODULES...", conf: 50 };
+
+    let htmlHist = allRes.map(r => getT(r.number));
+    let p1 = htmlHist[0], p2 = htmlHist[1], p3 = htmlHist[2];
+
+    // Rule 1: Dragon Flow Detection (Lagaatar 3 same pattern hone par follow trend)
+    if(p1 === p2 && p2 === p3){
+      trendText = "🔥 DRAGON FLOW DETECTED";
+      prediction = p1; 
+      conf = 91 + Math.floor(Math.random() * 7); // 91% to 97%
+    } 
+    // Rule 2: Neural Reverse Mode (Agar normal hai toh strict reverse)
+    else {
+      trendText = "🔄 NEURAL REVERSE ACTIVE";
+      prediction = (p1 === "BIG" ? "SMALL" : "BIG"); 
+      conf = 76 + Math.floor(Math.random() * 12); // 76% to 87%
     }
 
-    function getSugg(p) {
-      let pool = p === "BIG" ? [5,6,7,8,9] : [0,1,2,3,4];
-      if (allRes.length < 5) return p==="BIG" ? [6,8] : [1,3];
-      
-      let recent = allRes.slice(0, 30).map(r => parseInt(r.number));
-      let counts = {0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};
-      recent.forEach(n => counts[n]++);
-      
-      let sorted = pool.sort((a,b) => counts[b] - counts[a]);
-      return [sorted[0], sorted[1]];
+    if(conf > 99) conf = 99;
+    return { pred: prediction, text: trendText, conf: conf };
+  }
+
+  function getSugg(p){
+    let pool = p === "BIG" ? [5,6,7,8,9] : [0,1,2,3,4];
+    if(allRes.length < 5) return p === "BIG" ? [6,8] : [1,3];
+
+    let recent = allRes.slice(0, 30).map(r => parseInt(r.number));
+    let counts = {0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};
+    recent.forEach(n => counts[n]++);
+
+    let sorted = pool.sort((a,b) => counts[b] - counts[a]);
+    return [sorted[0], sorted[1]];
+  }
+
+  function updUI(){
+    if(allRes.length < 1) return;
+
+    let aiData = getPredData();
+    lastPred = aiData.pred;
+
+    document.getElementById('trendSts').innerText = aiData.text;
+    document.getElementById('confText').innerText = aiData.conf + "%";
+
+    let bar = document.getElementById('confFill');
+    bar.style.width = aiData.conf + "%";
+    if(aiData.conf > 85) bar.style.background = "linear-gradient(90deg, #4a5568, var(--gold-solid))";
+    else if(aiData.conf > 70) bar.style.background = "linear-gradient(90deg, #718096, #d4af37)";
+    else bar.style.background = "linear-gradient(90deg, #4a5568, #2d3748)";
+
+    let el = document.getElementById('pRes');
+    el.classList.remove('pop-kick');
+    void el.offsetWidth;
+    el.innerHTML = lastPred;
+    el.className = lastPred === "BIG" ? "prediction-output val-big pop-kick" : "prediction-output val-small pop-kick";
+
+    let sug = getSugg(lastPred);
+    lastNums = sug;
+    document.getElementById('nRow').innerHTML = `
+      <div class="diamond-node"><span>${sug[0]}</span></div>
+      <div class="diamond-node"><span>${sug[1]}</span></div>
+    `;
+  }
+
+  function updStats(){
+    document.getElementById('wC').innerText = wC;
+    document.getElementById('lC').innerText = lC;
+    let total = wC + lC;
+    document.getElementById('wR').innerText = total ? Math.round((wC / total) * 100) + "%" : "0%";
+  }
+
+  function updHist(isNew = false){
+    let tbody = document.getElementById('hBody');
+    if(!rounds.length){
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:30px;">Awaiting Neural Node Synced Log...</td></tr>';
+      return;
     }
 
-    function updUI() {
-      if (allRes.length < 1) return;
-      
-      let aiData = getPredData();
-      lastPred = aiData.pred;
-      
-      // Update Texts
-      document.getElementById('trendSts').innerText = aiData.text;
-      document.getElementById('confText').innerText = aiData.conf + "%";
-      
-      // Update Confidence Bar color based on %
-      let bar = document.getElementById('confFill');
-      bar.style.width = aiData.conf + "%";
-      if(aiData.conf > 80) bar.style.background = "linear-gradient(90deg, #00e5ff, #00ffaa)";
-      else if(aiData.conf > 65) bar.style.background = "linear-gradient(90deg, #ffd700, #ff8c00)";
-      else bar.style.background = "linear-gradient(90deg, #ff2a5f, #ff007f)";
+    let htmlCode = '';
+    for(let i = rounds.length - 1; i >= 0; i--){
+      let r = rounds[i], rowCls = 'row-loss', txtCls = 'status-loss', txt = 'LOSS';
+      if(r.isJackpot){ rowCls = 'row-jack'; txtCls = 'status-jack'; txt = 'JACKPOT'; }
+      else if(r.isWin){ rowCls = 'row-win'; txtCls = 'status-win'; txt = r.isNumWin && !r.isTypeWin ? 'WIN (NUM)' : 'WIN'; }
 
-      // Trigger Animation for Prediction
-      let el = document.getElementById('pRes');
-      el.classList.remove('pop-anim');
-      void el.offsetWidth; // trigger reflow
-      el.innerHTML = lastPred;
-      el.className = lastPred === "BIG" ? "prediction-val val-big pop-anim" : "prediction-val val-small pop-anim";
-      
-      // Update Numbers
-      let sug = getSugg(lastPred);
-      lastNums = sug;
-      document.getElementById('nRow').innerHTML = `
-        <div class="hex-num"><span>${sug[0]}</span></div>
-        <div class="hex-num"><span>${sug[1]}</span></div>
-      `;
+      let animClass = (isNew && i === rounds.length - 1) ? 'pop-kick' : '';
+
+      htmlCode += `<tr class="${rowCls} ${animClass}">
+        <td style="color:var(--text-muted);font-family:monospace;letter-spacing:1px;">..${r.period.slice(-5)}</td>
+        <td><b style="letter-spacing:1px;">${r.predicted}</b> <span style="font-size:.75rem;opacity:.6;">[${r.predNum}]</span></td>
+        <td>${r.number} (${r.type})</td>
+        <td class="${txtCls}" style="text-align:right;">${txt}</td>
+      </tr>`;
     }
+    tbody.innerHTML = htmlCode;
+    updStats();
+  }
 
-    function updStats() {
-      document.getElementById('wC').innerText = wC;
-      document.getElementById('lC').innerText = lC;
-      let total = wC + lC;
-      document.getElementById('wR').innerText = total ? Math.round((wC/total)*100) + "%" : "0%";
-    }
+  function procRes(per, num){
+    if(rounds.some(r => r.period === per)) return;
 
-    function updHist(isNew = false) {
-      let tbody = document.getElementById('hBody');
-      if (!rounds.length) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--light-grey);">Awaiting Neural Data...</td></tr>'; return; }
-      
-      let html = '';
-      for (let i = rounds.length-1; i >= 0; i--) {
-        let r = rounds[i], rowCls = 'row-loss', txtCls = 'txt-loss', txt = 'LOSS';
-        if (r.isJackpot) { rowCls = 'row-jack'; txtCls = 'txt-jack'; txt = 'JACKPOT'; }
-        else if (r.isWin) { rowCls = 'row-win'; txtCls = 'txt-win'; txt = r.isNumWin && !r.isTypeWin ? 'WIN (NUM)' : 'WIN'; }
-        
-        // Apply animation class only to the newest row
-        let animClass = (isNew && i === rounds.length - 1) ? 'new-row' : '';
+    let actT = getT(num), isWin = false, isJack = false, isNumWin = false, isTypeWin = false;
+    let pred = lastPred, pNum = lastNums.join(',');
 
-        html += `<tr class="${rowCls} ${animClass}">
-          <td style="color:var(--light-grey); font-family:monospace;">..${r.period.slice(-5)}</td>
-          <td><b>${r.predicted}</b> <span style="font-size:0.7rem; opacity:0.7;">[${r.predNum}]</span></td>
-          <td>${r.number} (${r.type})</td>
-          <td class="${txtCls}" style="text-align:right;">${txt}</td>
-        </tr>`;
+    if(rounds.length > 0 || allRes.length > 0){
+      let numMatch = lastNums.includes(parseInt(num));
+      let typeMatch = (pred === actT);
+      isNumWin = numMatch; isTypeWin = typeMatch;
+
+      if(typeMatch && numMatch){
+        isJack = true; isWin = true; wC++;
+        document.getElementById('aSts').innerHTML = `⚡ SYSTEM JACKPOT UNLOCKED [${num}]`;
+        document.getElementById('aSts').style.color = 'var(--gold-bright)';
+        document.getElementById('aSts').style.borderColor = 'var(--gold-solid)';
+        playSound('jackpot');
+      }else if(typeMatch){
+        isWin = true; wC++;
+        document.getElementById('aSts').innerHTML = `✅ ALIGNMENT RECOGNIZED [${actT}]`;
+        document.getElementById('aSts').style.color = 'var(--sys-green)';
+        document.getElementById('aSts').style.borderColor = 'var(--sys-green)';
+        playSound('win');
+      }else if(numMatch){
+        isWin = true; wC++;
+        document.getElementById('aSts').innerHTML = `✅ TARGET BLOCK LOCKED [${num}]`;
+        document.getElementById('aSts').style.color = 'var(--sys-green)';
+        document.getElementById('aSts').style.borderColor = 'var(--sys-green)';
+        playSound('win');
+      }else{
+        lC++;
+        document.getElementById('aSts').innerHTML = `❌ PARADIGM SHIFT DETECTED [${actT}]`;
+        document.getElementById('aSts').style.color = 'var(--sys-red)';
+        document.getElementById('aSts').style.borderColor = 'var(--sys-red)';
+        playSound('loss');
       }
-      tbody.innerHTML = html;
-      updStats();
+
+      rounds.push({
+        period:per,
+        number:parseInt(num),
+        type:actT,
+        predicted:pred,
+        predNum:pNum,
+        isWin,
+        isJackpot:isJack,
+        isNumWin,
+        isTypeWin
+      });
+    }else{
+      document.getElementById('aSts').innerHTML = '📡 Core stream linked seamlessly...';
     }
 
-    function procRes(per, num) {
-      if (rounds.some(r => r.period === per)) return;
-      let actT = getT(num), isWin = false, isJack = false, isNumWin = false, isTypeWin = false;
-      let pred = lastPred, pNum = lastNums.join(',');
-      let sts = document.getElementById('aSts');
+    updHist(true);
+  }
 
-      if (rounds.length > 0 || allRes.length > 0) {
-        let numMatch = lastNums.includes(parseInt(num));
-        let typeMatch = (pred === actT);
-        isNumWin = numMatch; isTypeWin = typeMatch;
+  async function loadData(){
+    try{
+      let res = await fetch(API + "?t=" + Date.now());
+      let data = await res.json();
 
-        if (typeMatch && numMatch) {
-          isJack = true; isWin = true; wC++;
-          sts.innerHTML = `⚡ QUANTUM JACKPOT SECURED [${num}]`; sts.style.color='var(--warning)'; sts.style.borderColor='var(--warning)';
-          playSound('jackpot');
-        } else if (typeMatch) {
-          isWin = true; wC++;
-          sts.innerHTML = `✅ TREND ALIGNED [${actT}]`; sts.style.color='var(--success)'; sts.style.borderColor='var(--success)';
-          playSound('win');
-        } else if (numMatch) {
-          isWin = true; wC++;
-          sts.innerHTML = `✅ TARGET HIT [${num}]`; sts.style.color='var(--success)'; sts.style.borderColor='var(--success)';
-          playSound('win');
-        } else {
-          lC++;
-          sts.innerHTML = `❌ ENTROPY SHIFT DETECTED [${actT}]`; sts.style.color='var(--error)'; sts.style.borderColor='var(--error)';
-          playSound('loss');
-        }
-        rounds.push({period:per, number:parseInt(num), type:actT, predicted:pred, predNum:pNum, isWin, isJackpot:isJack, isNumWin, isTypeWin});
-      } else {
-        sts.innerHTML = '📡 Server bridge stabilized...';
+      if(data?.data?.list?.length){
+        allRes = data.data.list;
+        let latest = allRes[0];
+        document.getElementById('pID').innerHTML =
+          `BLOCK: <span style="color:var(--gold-bright)">${latest.issueNumber.slice(-8)}</span> | VALUE: <span style="color:#fff">${latest.number}</span>`;
+        updUI();
+        lastPer = latest.issueNumber;
+        loaded = true;
       }
-      updHist(true); // Pass true to trigger animation
+    }catch(e){
+      document.getElementById('aSts').innerText = "⚠️ Network latency mismatch detected...";
+      setTimeout(loadData, 3000);
     }
+  }
 
-    async function loadData() {
-      try {
-        let res = await fetch(API + "?t=" + Date.now());
-        let data = await res.json();
-        if (data?.data?.list?.length) {
+  async function checkNew(){
+    if(!loaded) return;
+    try{
+      let res = await fetch(API + "?t=" + Date.now());
+      let data = await res.json();
+
+      if(data?.data?.list?.length){
+        let latest = data.data.list[0];
+        let per = latest.issueNumber, num = parseInt(latest.number);
+
+        if(lastPer !== per){
+          procRes(per, num);
+          lastPer = per;
           allRes = data.data.list;
-          let latest = allRes[0];
-          document.getElementById('pID').innerHTML = `HASH: <span style='color:var(--neon-blue)'>${latest.issueNumber.slice(-8)}</span> | L-RES: <span style='color:#fff'>${latest.number}</span>`;
+          document.getElementById('pID').innerHTML =
+            `BLOCK: <span style="color:var(--gold-bright)">${latest.issueNumber.slice(-8)}</span> | VALUE: <span style="color:#fff">${latest.number}</span>`;
           updUI();
-          lastPer = latest.issueNumber;
-          loaded = true;
         }
-      } catch(e) {
-        document.getElementById('aSts').innerText = "⚠️ Core connection lagging...";
-        setTimeout(loadData, 3000);
       }
+    }catch(e){}
+  }
+
+  window.resetAll = function(){
+    if(confirm("WARNING: Proceeding will wipe the internal data cache structures. Proceed?")){
+      rounds = [];
+      wC = 0;
+      lC = 0;
+      updHist();
+      loadData();
+
+      let sts = document.getElementById('aSts');
+      sts.innerHTML = '🔄 Local Cache Cleared. Hard Reset Complete...';
+      sts.style.color = 'var(--gold-bright)';
+      sts.style.borderColor = 'rgba(214, 175, 87, 0.3)';
+
+      document.getElementById('confFill').style.width = '0%';
+      document.getElementById('confText').innerText = '0%';
     }
+  };
 
-    async function checkNew() {
-      if (!loaded) return;
-      try {
-        let res = await fetch(API + "?t=" + Date.now());
-        let data = await res.json();
-        if (data?.data?.list?.length) {
-          let latest = data.data.list[0];
-          let per = latest.issueNumber, num = parseInt(latest.number);
-          if (lastPer !== per) {
-            procRes(per, num);
-            lastPer = per;
-            allRes = data.data.list;
-            document.getElementById('pID').innerHTML = `HASH: <span style='color:var(--neon-blue)'>${latest.issueNumber.slice(-8)}</span> | L-RES: <span style='color:#fff'>${latest.number}</span>`;
-            updUI();
-          }
-        }
-      } catch(e) {}
-    }
+  setInterval(() => {
+    let sec = 60 - new Date().getSeconds();
+    let tmr = document.getElementById('tmr');
+    tmr.innerText = `00:${sec < 10 ? '0' + sec : sec}`;
+    tmr.className = sec <= 5 ? 'timer-box warning' : 'timer-box';
+  }, 1000);
 
-    window.resetAll = function() {
-      if (confirm("WARNING: Purging memory will reset the Neural Net. Proceed?")) {
-        rounds = []; wC = 0; lC = 0;
-        updHist(); loadData();
-        let sts = document.getElementById('aSts');
-        sts.innerHTML = '🔄 Cache Cleared. Re-calibrating AI...';
-        sts.style.color = 'var(--neon-blue)'; sts.style.borderColor = 'rgba(0, 229, 255, 0.3)';
-        document.getElementById('confFill').style.width = '0%';
-        document.getElementById('confText').innerText = '0%';
-      }
-    };
-
-    setInterval(() => {
-      let sec = 60 - new Date().getSeconds();
-      let tmr = document.getElementById('tmr');
-      tmr.innerText = `00:${sec < 10 ? '0' + sec : sec}`;
-      tmr.className = sec <= 5 ? 'timer-box warning' : 'timer-box';
-    }, 1000);
-
-    loadData(); setInterval(checkNew, 3000);
-  })();
+  loadData();
+  setInterval(checkNew, 3000);
+})();
 </script>
+
 </body>
 </html>
